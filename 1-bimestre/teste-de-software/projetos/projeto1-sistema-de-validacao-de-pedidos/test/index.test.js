@@ -1,6 +1,6 @@
 const validarPedido = require("../index")
 
-test("Validar Pedido", () => {
+test("Pedido válido deve retornar true", () => {
     let pedido = {
         cliente: "Carlos",
         total: 150,
@@ -9,16 +9,24 @@ test("Validar Pedido", () => {
     expect(validarPedido(pedido)).toBeTruthy()
 })
 
-test("Cliente", () => {
+test("Pedido com total 0 deve retornar false", () => {
     let pedido = {
+        cliente: "Carlos",
+        total: 0,
+        itens: [],
+    }
+    expect(validarPedido(pedido)).toBeFalsy()
+})
 
+test("Pedido sem cliente deve retornar false", () => {
+    let pedido = {
         total: 150,
         itens: ["Produto A"],
     }
     expect(validarPedido(pedido)).toBeFalsy()
 })
 
-test("Pedido", () => {
+test("Pedido sem itens deve retornar false", () => {
     let pedido = {
         cliente: "Carlos",
 	    total: 150,
@@ -27,11 +35,3 @@ test("Pedido", () => {
     expect(validarPedido(pedido)).toBeFalsy()
 })
 
-test("Total", () => {
-    let pedido = {
-        cliente: "Carlos",
-	    total: 0,
-	    itens: [],
-    }
-    expect(validarPedido(pedido)).toBeFalsy()
-})
